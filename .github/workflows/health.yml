@@ -18,8 +18,22 @@ jobs:
       - name: 巡检并剔除失效源
         run: python scripts/health.py --workers 32
 
+      # 用原生 git 而不是第三方 auto-commit action：
+      # 它 push 失败时只会报 "Invalid status code: 1"，日志里藏不住根因。
+      # 这里先 pull --rebase 再 push，避免并发提交导致 non-fast-forward。
       - name: 有变化就自动提交回 main
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: 'chore(iptv): 自动剔除失效直播源'
-          file_pattern: output/*.m3u
+        run: |
+          set -e
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if [ -z "$(git status --porcelain output/result.m3u)" ]; then
+            echo "result.m3u 无变化，跳过提交。"
+            exit 0
+          fi
+
+          git add output/result.m3u
+          git commit -m "chore(iptv): 自动剔除失效直播源" || { echo "没有可提交的内容"; exit 0; }
+          git pull --rebase origin main
+          git push origin main
+          echo "已提交并推送。"

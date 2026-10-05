@@ -76,6 +76,8 @@ def main():
     ap.add_argument("--workers", type=int, default=24)
     ap.add_argument("--limit", type=int, default=0, help="只测前 N 个频道，0 表示全部")
     ap.add_argument("--dry-run", action="store_true", help="只报告不落盘")
+    ap.add_argument("--max-remove-ratio", type=float, default=0.4,
+                    help="剔除比例超过这个阈值就中止（不写文件），防网络抖动误删整批源。默认 0.4")
     args = ap.parse_args()
 
     if not os.path.exists(args.file):
@@ -109,8 +111,20 @@ def main():
 
     total_urls = sum(len(urls_of(b)) for b in blocks)
     dead_urls = sum(len(urls_of(b)) for b in blocks) - sum(len(k) - 1 for k in keep)
-    print("结果：保留 %d 台，剔除 %d 台（%d 个地址不通）"
-          % (len(keep), len(dead), dead_urls))
+    ratio = len(dead) / float(len(blocks)) if blocks else 0.0
+    print("结果：保留 %d 台，剔除 %d 台（%d 个地址不通，剔除率 %.1f%%）"
+          % (len(keep), len(dead), dead_urls, ratio * 100))
+    print("剔除率上限 %.0f%%" % (args.max_remove_ratio * 100))
+
+    # 安全阀：大面积"失效"通常是网络抖动/上游整体抽风，而不是源真的死了。
+    # 真要大面积清洗，手动把阈值调大再跑。
+    if ratio > args.max_remove_ratio:
+        print("")
+        print("⚠️ 剔除率 %.1f%% 超过上限 %.1f%%，判定为异常，本次不写文件（源未被改动）。"
+              % (ratio * 100, args.max_remove_ratio * 100))
+        print("   想强制清洗请显式加参数，例如 --max-remove-ratio 0.9")
+        print("   若确信源真的大面积失效，请手工核对后再跑一次。")
+        return
     if dead:
         print("--- 被剔除的频道 ---")
         for b in dead[:20]:
