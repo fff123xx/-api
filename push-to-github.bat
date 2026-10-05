@@ -4,7 +4,7 @@ cd /d "%~dp0"
 
 echo ============================================
 echo   TVBox config - push to GitHub
-echo   repo: https://github.com/2905273808qq-hue/-api
+echo   repo: https://github.com/fff123xx/-api
 echo   branch: main
 echo ============================================
 echo.
@@ -37,21 +37,21 @@ echo   The token you paste below will NOT be shown on screen.
 echo   If GitHub asks for a password, that password IS this token.
 echo.
 
-powershell -NoProfile -Command "$s=Read-Host 'Paste token here' -AsSecureString; $t=[Runtime.InteropServices.Marshal]::PtrToStringBSTR([Runtime.InteropServices.Marshal]::SecureStringToBSTR($s)); $u='https://2905273808qq-hue:'+$t+'@github.com/2905273808qq-hue/-api.git'; git push $u main"
+powershell -NoProfile -Command "$s=Read-Host 'Paste token here' -AsSecureString; $t=[Runtime.InteropServices.Marshal]::PtrToStringBSTR([Runtime.InteropServices.Marshal]::SecureStringToBSTR($s)); $u='https://fff123xx:'+$t+'@github.com/fff123xx/-api.git'; git push $u main"
 
 echo.
 echo --------------------------------------------
 echo [3/3] pushed. Verify at:
-echo   https://github.com/2905273808qq-hue/-api
+echo   https://github.com/fff123xx/-api
 echo.
 echo THEN open GitHub Pages ^(one time only^):
 echo   repo  -^>  Settings  -^>  Pages
 echo   -^>  "Create with GitHub Actions"  (or Source ^= Deploy from a branch)
 echo   -^>  branch:  main        folder:  /root        Save
 echo   wait 1-2 min, then check:
-echo   https://2905273808qq-hue.github.io/-api/tvbox.json
+echo   https://fff123xx.github.io/-api/tvbox.json
 echo.
 echo If that URL does not open in China, use jsDelivr instead:
-echo   https://cdn.jsdelivr.net/gh/2905273808qq-hue/-api@main/tvbox.json
+echo   https://cdn.jsdelivr.net/gh/fff123xx/-api@main/tvbox.json
 echo.
 pause

@@ -1,15 +1,15 @@
-# 2905273808qq-hue/-api
+# fff123xx/-api
 
 自己的电视盒子（影视TV / TVBox）直播配置仓库。直播源放在这里，**地址永远受你自己控制**，上游作者闭站、删文件、改源都影响不到你。
 
-对应仓库：https://github.com/2905273808qq-hue/-api
+对应仓库：https://github.com/fff123xx/-api
 
 ---
 
 ## 1. 目录结构（上传后仓库里应该长这样）
 
 ```
-2905273808qq-hue/-api
+fff123xx/-api
 ├── tvbox.json                     ← 配置入口（影视TV「配置地址」填这个）
 ├── README.md
 ├── .gitignore
@@ -30,17 +30,17 @@
 
 | 前缀 | 格式 | 实测 | 说明 |
 | --- | --- | --- | --- |
-| **Pages（推荐）** | `2905273808qq-hue.github.io/-api/文件` | 未开（404） | 不限大小，走 Cloudflare 国内能开。**大 EPG 只能走它** |
-| **jsDelivr** | `cdn.jsdelivr.net/gh/2905273808qq-hue/-api@main/文件` | ✅ 200 / 511B 真实内容 | 整包超 50MB 会 403，只适合小文件 |
-| **raw** | `raw.githubusercontent.com/2905273808qq-hue/-api/main/文件` | ✅ 200 / 511B 真实内容 | 不限大小，国内常超时，可拼 `gh-proxy.com/` 前缀 |
+| **Pages（推荐）** | `fff123xx.github.io/-api/文件` | 未开（404） | 不限大小，走 Cloudflare 国内能开。**大 EPG 只能走它** |
+| **jsDelivr** | `cdn.jsdelivr.net/gh/fff123xx/-api@main/文件` | ✅ 200 / 511B 真实内容 | 整包超 50MB 会 403，只适合小文件 |
+| **raw** | `raw.githubusercontent.com/fff123xx/-api/main/文件` | ✅ 200 / 511B 真实内容 | 不限大小，国内常超时，可拼 `gh-proxy.com/` 前缀 |
 
 ## 3. 影视TV 里怎么填
 
 | 想做什么 | 填这一条 |
 | --- | --- |
-| 完整配置（推荐） | `https://2905273808qq-hue.github.io/-api/tvbox.json` |
-| 只要直播源 | `https://2905273808qq-hue.github.io/-api/output/result.m3u` |
-| 必须要能连（raw 备用） | `https://gh-proxy.com/https://raw.githubusercontent.com/2905273808qq-hue/-api/main/output/result.m3u` |
+| 完整配置（推荐） | `https://fff123xx.github.io/-api/tvbox.json` |
+| 只要直播源 | `https://fff123xx.github.io/-api/output/result.m3u` |
+| 必须要能连（raw 备用） | `https://gh-proxy.com/https://raw.githubusercontent.com/fff123xx/-api/main/output/result.m3u` |
 
 路径：影视TV → **设置 → 配置地址**（或设置 → 直播源 → 远程）。
 
