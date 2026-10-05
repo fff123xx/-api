@@ -1,0 +1,2 @@
+# 统一使用 LF 行尾：否则 fetch.sh / health.py 在 Linux（GitHub Actions）下会因 ^M 报错
+* text=auto eol=lf

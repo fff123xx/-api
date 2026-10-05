@@ -1,0 +1,13 @@
+# 直播源轮换清单。一行一个，从上往下取第一个能下通的。
+# 换行的用法：改完这个文件后跑 bash scripts/fetch.sh
+#
+# 实测 2026-10-05 全部可下载（本机网络环境为准，你那边可能不同）
+
+https://lightconer.github.io/iptv-api/result.m3u
+https://lightconer.github.io/iptv-api/result.txt
+https://gh-proxy.com/https://raw.githubusercontent.com/CCSH/IPTV/refs/heads/main/live.m3u
+https://gh-proxy.com/https://raw.githubusercontent.com/zilong7728/Collect-IPTV/refs/heads/main/best_sorted.m3u
+
+# 说明：raw.githubusercontent.com 国内经常超时，所以上面已经帮你拼好了
+# gh-proxy.com 镜像前缀。若要换镜像，把前缀整段替换掉即可，
+# 也可以换成 https://ghfast.top/https://raw.githubusercontent.com/...

@@ -1,0 +1,25 @@
+name: 直播源每日巡检
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 拉代码
+        uses: actions/checkout@v4
+
+      - name: 巡检并剔除失效源
+        run: python scripts/health.py --workers 32
+
+      - name: 有变化就自动提交回 main
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore(iptv): 自动剔除失效直播源'
+          file_pattern: output/*.m3u
