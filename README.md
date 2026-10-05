@@ -26,15 +26,20 @@ fff123xx/-api
 
 ## 2. 三个地址前缀（实测结论）
 
-仓库名以 `-` 开头（`-api`），这条路径没问题（旧账号下三种前缀都实测过能取到文件）。当前仓库刚建好、文件尚未上传，所以暂时都是 404；上传并开 Pages 后就生效：
+仓库名以 `-` 开头（`-api`），实测三种前缀**都能正常取到文件**（仓库名带前导短横不影响任何前缀，不用担心）：
 
-| 前缀 | 格式 | 当前状态 | 说明 |
+| 前缀 | 格式 | 实测 | 说明 |
 | --- | --- | --- | --- |
-| **Pages（推荐）** | `fff123xx.github.io/-api/文件` | 待开启 | 不限大小，走 Cloudflare 国内能开。**大 EPG 只能走它** |
-| **jsDelivr** | `cdn.jsdelivr.net/gh/fff123xx/-api@main/文件` | 待上传 | 整包超 50MB 会 403，只适合小文件 |
-| **raw** | `raw.githubusercontent.com/fff123xx/-api/main/文件` | 待上传 | 不限大小，国内常超时，可拼 `gh-proxy.com/` 前缀 |
+| **Pages（推荐）** | `fff123xx.github.io/-api/文件` | ✅ 200 | `tvbox.json` 370B / `result.m3u` 395KB(1432 台) / `result.txt` 145KB，全部实测通过。GitHub 托管，国内可直连 |
+| **jsDelivr** | `cdn.jsdelivr.net/gh/fff123xx/-api@main/文件` | ✅ 200 | 国内最稳的镜像，**首选备份** |
+| **raw** | `raw.githubusercontent.com/fff123xx/-api/main/文件` | ✅ 200 | 不限大小，国内常超时，可拼 `gh-proxy.com/` 前缀 |
 
-**国内打不开 Pages 时优先换 jsDelivr 那条**，再不行就给 raw 拼 `https://gh-proxy.com/` 前缀。
+**国内打不开 Pages 就换 jsDelivr 那条**；还不行就给 raw 拼 `https://gh-proxy.com/` 前缀。已实测：
+
+```
+https://cdn.jsdelivr.net/gh/fff123xx/-api@main/tvbox.json
+https://gh-proxy.com/https://raw.githubusercontent.com/fff123xx/-api/main/output/result.m3u
+```
 
 ## 3. 影视TV 里怎么填
 
